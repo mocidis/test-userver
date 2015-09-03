@@ -12,7 +12,8 @@ MAIN_S_SRCS:=server.c
 MAIN_C_SRCS:=client.c
 
 CFLAGS:=-I$(MAIN_DIR)/include -I$(COMMON_DIR)/include -I$(USERVER_DIR)/include
-LIBS:=-lpthread
+CFLAGS += -I../json-c/output/include/json-c
+LIBS:=../json-c/output/lib/libjson-c.a -lpthread
 
 SERVER_APP:=server
 CLIENT_APP:=client
