@@ -2,9 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdarg.h>
 
 void usage(char *app) {
-	printf("%s <server ip> <server port>\n", app);
+	printf("%s <connection string>\n", app);
 	exit(-1);
 }
 
@@ -36,19 +37,13 @@ int myproto_uclient_recv(uclient_t *uclient, uproto_response_t *resp) {
 int main(int argc, char *argv[]) {
 
 	uclient_t uclient;
-	int port = -1;
 	char *server = argv[1];
-	if( argc < 3 ) {
+	if( argc < 2 ) {
 		usage(argv[0]);
 	}
-	port = atoi(argv[2]);
-	if(port <= 0) {
-		port = 23456;
-	}
-	printf("--%s-- --%d--\n", server, port);
 	uclient.build_request_f = &build_request;
 	uclient.parse_response_f = &parse_response;
-	uclient_open(&uclient, server, port);
+	uclient_open(&uclient, argv[1]);
 
 	char name[] = "Bui Danh Quy";
 	int age = 23;

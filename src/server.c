@@ -1,11 +1,12 @@
-#include "userver.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include "userver.h"
+#include "ansi-utils.h"
 
 void usage(char *app) {
-	printf("%s <port number>\n", app);
+	printf("%s <connection string>\n", app);
 	exit(-1);
 }
 
@@ -30,16 +31,11 @@ static int build_response(char *buff, int len, uproto_response_t *response) {
 
 int main(int argc, char *argv[]) {
 	userver_t userver;
-	int port = -1;
-
 	if( argc < 2 ) {
 		usage(argv[0]);
 	}
-	port = atoi(argv[1]);
-	if(port <= 0) {
-		port = 23456;
-	}
-	userver_init(&userver, port);
+
+	userver_init(&userver, argv[1]);
 	
 	userver.parse_request_f = &parsed_request;
 	userver.build_response_f = &build_response;
@@ -47,7 +43,7 @@ int main(int argc, char *argv[]) {
 
 	userver_start(&userver);
 	// Main loop goes here
-	pause();
+	my_pause();
 	userver_end(&userver);
 	
 	return 0;
