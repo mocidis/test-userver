@@ -1,0 +1,13 @@
+BEGIN myproto
+
+REQUEST {
+    char name[50];
+    int age;
+}
+
+RESPONSE {
+    int code;
+    char msg[20];
+}
+
+END
