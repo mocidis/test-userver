@@ -1,5 +1,7 @@
 .PHONY: all clean
 
+USERVER_DIR:=../userver
+
 COMMON_DIR:=../common
 COMMON_SRCS:=ansi-utils.c
 
@@ -45,6 +47,6 @@ $(MAIN_S_SRCS:.c=.o): %.o: $(MAIN_DIR)/src/%.c
 
 gen: protocol/$(PROTOCOL)
 	mkdir -p gen 
-	awk -f gen-tools/gen.awk $<
+	awk -f $(USERVER_DIR)/gen-tools/gen.awk $<
 clean:
 	rm -fr gen $(SERVER_APP) $(CLIENT_APP) *.o
