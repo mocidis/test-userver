@@ -1,13 +1,17 @@
 BEGIN myproto
 
-REQUEST {
-    char name[50];
-    int age;
+REQUEST arbiter_update 100 {
+    PARAM name char [50]
+    PARAM age int
 }
 
-RESPONSE {
-    int code;
-    char msg[20];
+REQUEST arbiter_refresh 101 {
+    PARAM address char [60]
+    PARAM weight double
 }
 
+REQUEST uuu_shit 102 {
+    PARAM yyy int
+    PARAM xxx double
+}
 END

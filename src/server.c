@@ -10,23 +10,18 @@ void usage(char *app) {
 	exit(-1);
 }
 
-static void parsed_request(char *buff, int len, myproto_request_t *req) {
-	char name [50];
-	int age;
-
-	sscanf(buff, "{name:%s, age:%d}", name, &age);
-	strncpy(req->name, name, sizeof(req->name));
-	req->age = age;
-}
-
-static void on_request(myproto_server_t *userver, myproto_request_t *request, myproto_response_t *response) {
-	// Do nothing, just generate a response
-	response->code = 1;
-	strncpy(response->msg, "Good request", sizeof(response->msg));
-}
-
-static int build_response(char *buff, int len, myproto_response_t *response) {
-	return snprintf(buff, len, "{code:%d, msg:%s}", response->code, response->msg);
+static void on_request(myproto_server_t *userver, myproto_request_t *request) {
+    switch(request->msg_id) {
+    case ARBITER_UPDATE:
+        printf("arbiter update\n");
+        break;
+    case ARBITER_REFRESH:
+        printf("arbiter refresh\n");
+        break;
+    case UUU_SHIT:
+        printf("yyy:%d, xxx:%lf\n", request->uuu_shit.yyy, request->uuu_shit.xxx);
+        break;
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -37,13 +32,15 @@ int main(int argc, char *argv[]) {
 
 	myproto_server_init(&userver, argv[1]);
 	
-	userver.parse_request_f = &parsed_request;
-	userver.build_response_f = &build_response;
 	userver.on_request = &on_request;
 
 	myproto_server_start(&userver);
 	// Main loop goes here
 	my_pause();
+    myproto_server_join(&userver, "239.0.0.1");
+    my_pause();
+    myproto_server_leave(&userver, "239.0.0.1");
+    my_pause();
 	myproto_server_end(&userver);
 	
 	return 0;
