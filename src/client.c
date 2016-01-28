@@ -9,6 +9,13 @@ void usage(char *app) {
 	exit(-1);
 }
 
+char *my_id() {
+    return "clientapp";
+}
+
+char *my_pph() {
+    return "passphrase";
+}
 
 int main(int argc, char *argv[]) {
 	myproto_client_t uclient;
@@ -17,14 +24,16 @@ int main(int argc, char *argv[]) {
 	if( argc < 2 ) {
 		usage(argv[0]);
 	}
-	myproto_client_open(&uclient, argv[1]);
+	//myproto_client_open(&uclient, argv[1]);
+	myproto_client_open_ex(&uclient, argv[1], &my_id, &my_pph);
 
     
     req.msg_id = ARBITER_UPDATE;
     strncpy(req.arbiter_update.name, "HOANG XUAN TUNG", sizeof(req.arbiter_update.name));
     req.arbiter_update.age = 38;
 
-	myproto_client_send(&uclient, &req);
+	//myproto_client_send(&uclient, &req);
+	myproto_client_send_ex(&uclient, &req);
 
     myproto_client_close(&uclient);
 
