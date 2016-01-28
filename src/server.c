@@ -39,20 +39,19 @@ int main(int argc, char *argv[]) {
 	if( argc < 2 ) {
 		usage(argv[0]);
 	}
-    
     pj_init();
     pj_caching_pool_init(&cp, 0, 4096);
-
     pool = pj_pool_create(&cp.factory, "pool", 256, 256, NULL);
+
+    userver.on_init_done_f = NULL;
 
     //myproto_server_init(&userver, argv[1], pool);
     myproto_server_init_ex(&userver, argv[1], pool, &get_pph);
-	
 	userver.on_request_f = &on_request;
+    userver.on_open_socket_f = NULL;
 
 	//myproto_server_start(&userver);
 	myproto_server_start_ex(&userver);
-
 	// Main loop goes here
 	my_pause();
     myproto_server_join(&userver, "239.0.0.1");
@@ -60,6 +59,5 @@ int main(int argc, char *argv[]) {
     myproto_server_leave(&userver, "239.0.0.1");
     my_pause();
 	myproto_server_end(&userver);
-	
 	return 0;
 }

@@ -26,7 +26,6 @@ int main(int argc, char *argv[]) {
 	}
 	//myproto_client_open(&uclient, argv[1]);
 	myproto_client_open_ex(&uclient, argv[1], &my_id, &my_pph);
-
     
     req.msg_id = ARBITER_UPDATE;
     strncpy(req.arbiter_update.name, "HOANG XUAN TUNG", sizeof(req.arbiter_update.name));
