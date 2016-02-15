@@ -1,4 +1,4 @@
-CROSS_COMPILE:=3
+CROSS_COMPILE:=2
 
 ARMV7L:=1
 LINUX_X86:=2
@@ -12,6 +12,7 @@ endif
 ifeq ($(CROSS_COMPILE),$(LINUX_X86))
 	CROSS_TOOL:=gcc
 	LIBS_DIR:=../libs/linux-i686
+    LIBS:=-ljson-c -lcrypto
 endif
 ifeq ($(CROSS_COMPILE),$(LINUX_X86_64))
 	CROSS_TOOL:=gcc
