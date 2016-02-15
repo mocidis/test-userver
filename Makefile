@@ -18,7 +18,7 @@ MAIN_C_SRCS:=client.c
 #CFLAGS:=-g -I$(MAIN_DIR)/include -I$(COMMON_DIR)/include -I$(GEN_DIR) -DPJ_AUTOCONF=1 -O2 -DPJ_IS_BIG_ENDIAN=0 -DPJ_IS_LITTLE_ENDIAN=1 -I../libs/darwin-x86_64/include/json-c -I../libs/darwin-x86_64/include
 
 #LIBS:=-L../libs/darwin-x86_64/lib ../libs/darwin-x86_64/lib/libjson-c.a -lpthread -lstdc++ -lpjsua-x86_64-apple-darwin12.5.0 -lpjsip-ua-x86_64-apple-darwin12.5.0 -lpjsip-simple-x86_64-apple-darwin12.5.0 -lpjsip-x86_64-apple-darwin12.5.0 -lpjmedia-codec-x86_64-apple-darwin12.5.0 -lpjmedia-x86_64-apple-darwin12.5.0 -lpjmedia-videodev-x86_64-apple-darwin12.5.0 -lpjmedia-audiodev-x86_64-apple-darwin12.5.0 -lpjmedia-x86_64-apple-darwin12.5.0 -lpjnath-x86_64-apple-darwin12.5.0 -lpjlib-util-x86_64-apple-darwin12.5.0 -lsrtp-x86_64-apple-darwin12.5.0 -lresample-x86_64-apple-darwin12.5.0 -lgsmcodec-x86_64-apple-darwin12.5.0 -lspeex-x86_64-apple-darwin12.5.0 -lilbccodec-x86_64-apple-darwin12.5.0 -lg7221codec-x86_64-apple-darwin12.5.0 -lportaudio-x86_64-apple-darwin12.5.0 -lpj-x86_64-apple-darwin12.5.0 -lm -lpthread -lcrypto
-LIBS+=-L../libs/darwin-x86_64/lib ../libs/darwin-x86_64/lib/libjson-c.a -lcrypto
+#LIBS+=-L../libs/darwin-x86_64/lib ../libs/darwin-x86_64/lib/libjson-c.a -lcrypto
 
 SERVER_APP:=server
 CLIENT_APP:=client

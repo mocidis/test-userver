@@ -1,4 +1,4 @@
-CROSS_COMPILE:=5
+CROSS_COMPILE:=3
 
 ARMV7L:=1
 LINUX_X86:=2
@@ -18,6 +18,7 @@ endif
 ifeq ($(CROSS_COMPILE),$(LINUX_X86_64))
 	CROSS_TOOL:=gcc
 	LIBS_DIR:=../libs/linux-x86_64
+    LIBS:=-ljson-c -lcrypto
 #    LIBS:= -L$(LIBS_DIR)/lib -ljson-c -lpjsua2-x86_64-unknown-linux-gnu -lstdc++ -lpjsua-x86_64-unknown-linux-gnu -lpjsip-ua-x86_64-unknown-linux-gnu -lpjsip-simple-x86_64-unknown-linux-gnu -lpjsip-x86_64-unknown-linux-gnu -lpjmedia-codec-x86_64-unknown-linux-gnu -lpjmedia-x86_64-unknown-linux-gnu -lpjmedia-videodev-x86_64-unknown-linux-gnu -lpjmedia-audiodev-x86_64-unknown-linux-gnu -lpjnath-x86_64-unknown-linux-gnu -lpjlib-util-x86_64-unknown-linux-gnu -lsrtp-x86_64-unknown-linux-gnu -lresample-x86_64-unknown-linux-gnu -lgsmcodec-x86_64-unknown-linux-gnu -lspeex-x86_64-unknown-linux-gnu -lilbccodec-x86_64-unknown-linux-gnu -lg7221codec-x86_64-unknown-linux-gnu -lportaudio-x86_64-unknown-linux-gnu -lpj-x86_64-unknown-linux-gnu -ldl -lz -lm -lrt -lpthread -lasound -lsqlite3 -lcrypto
 endif
 ifeq ($(CROSS_COMPILE),$(MINGW_X86))
@@ -27,6 +28,8 @@ endif
 ifeq ($(CROSS_COMPILE),$(MACOS_X86_64))
 	CROSS_TOOL:=gcc
 	LIBS_DIR:=../libs/darwin-x86_64
+    LIBS:=../libs/darwin-x86_64/lib/libjson-c.a -lcrypto
+
 endif
 PKG_PATH:=`pwd`/$(LIBS_DIR)/lib/pkgconfig
-LIBS:=$(shell PKG_CONFIG_PATH=$(PKG_PATH) pkg-config --libs libpjproject)
+LIBS+=$(shell PKG_CONFIG_PATH=$(PKG_PATH) pkg-config --libs libpjproject)
