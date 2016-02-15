@@ -1,4 +1,5 @@
 BEGIN myproto
+#ENCRYPTED ON
 
 REQUEST arbiter_update 100 {
     PARAM name char [50]

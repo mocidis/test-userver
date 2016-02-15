@@ -45,13 +45,13 @@ int main(int argc, char *argv[]) {
 
     pool = pj_pool_create(&cp.factory, "pool", 256, 256, NULL);
 
-    //myproto_server_init(&userver, argv[1], pool);
-    myproto_server_init_ex(&userver, argv[1], pool, &get_pph);
+    myproto_server_init(&userver, argv[1], pool, &get_pph);
+    //myproto_server_init_ex(&userver, argv[1], pool, &get_pph);
 	
 	userver.on_request_f = &on_request;
 
-	//myproto_server_start(&userver);
-	myproto_server_start_ex(&userver);
+	myproto_server_start(&userver);
+	//myproto_server_start_ex(&userver);
 
 	// Main loop goes here
 	my_pause();
